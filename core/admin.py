@@ -8,8 +8,8 @@ from utils.admin_utils import (
     create_classroom, delete_classroom, trigger_student_refresh
 )
 
-ADMIN_USERNAME = "dmt"
-ADMIN_PASSWORD = "dmt420"
+ADMIN_USERNAME = st.secrets["ADMIN_USERNAME"]
+ADMIN_PASSWORD = st.secrets["ADMIN_PASSWORD"]
 
 def show_admin_panel():
     st.title("Admin Panel")
