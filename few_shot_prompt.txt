@@ -1,0 +1,33 @@
+Q: How many students were present on 2025-06-14?
+A: df['2025-06-14'].value_counts().get('P', 0)
+
+Q: Has roll number 101 attended on 2025-06-14?
+A: df.loc[df['Roll Number'] == '101', '2025-06-14'].values[0] == 'P'
+
+Q: How many total lectures has roll number 102 attended?
+A: (df[df['Roll Number'] == '102'].iloc[0].drop(['Roll Number', 'Name']) == 'P').sum()
+
+Q: List students who were present on 2025-06-15
+A: df[df['2025-06-15'] == 'P'][['Roll Number', 'Name']]
+
+Q: Total number of lectures conducted
+A: len([col for col in df.columns if col not in ['Roll Number', 'Name']])
+
+Q: What percentage of students were present on 2025-06-14?
+A: (df['2025-06-14'].value_counts().get('P', 0) / len(df)) * 100
+
+Q: List all dates student 105 was present
+A: (df[df['Roll Number'] == '105'].iloc[0].drop(['Roll Number', 'Name']) == 'P').index[df[df['Roll Number'] == '105'].iloc[0].drop(['Roll Number', 'Name']) == 'P'].tolist()
+
+Q: Show students absent on 2025-06-15
+A: df[df['2025-06-15'] != 'P'][['Roll Number', 'Name']]
+
+Q: Show attendance summary for all students
+A: df.drop(columns=['Roll Number', 'Name']).eq('P').sum(axis=1)
+
+Q: Who has full attendance?
+A: df[df.drop(columns=['Roll Number', 'Name']).eq('P').all(axis=1)][['Roll Number', 'Name']]
+
+Q: Who has lowest attendance?
+A: df.assign(total=df.drop(columns=['Roll Number', 'Name']).eq('P').sum(axis=1)).sort_values('total').head(1)[['Roll Number', 'Name']]
+
